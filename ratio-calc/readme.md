@@ -1,0 +1,3 @@
+# PROYEK TIK KELAS 10 UTSMAN KELOMPOK 10: KALKULATOR RASIO ASPEK
+
+Proyek ini ditujukan untuk memenuhi tugas Guru Pak Ais 
