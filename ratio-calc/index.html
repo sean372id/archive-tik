@@ -7,25 +7,199 @@
     <title>Kalkulator Aspek Rasio</title>
 </head>
 <body>
-    <div class="container">
-        <h2>
-            <span>Aspect Ratio </span>
-            Calculator
-        </h2>
-        <div class="wrapper-1">
-            <input type="number" id="ratio-width" value="16" />
-            <input type="number" id="ratio-height" value="9" />
-        </div>
-        <div class="box">
-            <div class="wrapper-2">
-                <label for="width">width:</label>
-                <input type="number" id="width" value="1280" />
+    <section class="aspect-ratio-calculator">
+        <div class="calc-container">
+            <div class="presets">
+                <h2>Preset</h2>
+                <h4>Standar Media Sosial</h4>
+                <button onclick="setInputValue(9, 16, 1080, 1920)">Instagram Stories & Reels</button>
+                <button onclick="setInputValue(1, 1, 1080, 1080)">Instagram Posts</button>
+                <button onclick="setInputValue(16, 9, 1920, 1080)">Youtube Video</button>
+                <button onclick="setInputValue(9, 16, 1080, 1920)">Youtube Shorts</button>
+                <button onclick="setInputValue(16, 9, 1080, 608)">Facebook Video</button>
+                <button onclick="setInputValue(16, 9, 1200, 675)">Twitter Video</button>
+                <button onclick="setInputValue(16, 9, 1080, 608)">LinkedIn Video</button>
+                <button onclick="setInputValue(9, 16, 608, 1080)">TikTok Video</button>
+                <h4>Standar Perangkat</h4>
+                <button onclick="setInputValue(16, 9, 1280, 720)">HD TV</button>
+                <button onclick="setInputValue(16, 9, 1920, 1080)">Full HD TV</button>
+                <button onclick="setInputValue(16, 9, 3840, 2160)">4K TV</button>
+                <button onclick="setInputValue(16, 9, 2560, 1440)">2K Monitor</button>
+                <button onclick="setInputValue(16, 9, 1920, 1080)">Full HD Monitor</button>
+                <button onclick="setInputValue(16, 9, 1366, 768)">HD Monitor</button>
+                <button onclick="setInputValue(16, 9, 1080, 608)">HD Laptop</button>
+                <button onclick="setInputValue(16, 9, 750, 1334)">iPhone 6/7/8</button>
+                <button onclick="setInputValue(19.5, 9, 1080, 2340)">iPhone X/XS/11 Pro</button>
+                <button onclick="setInputValue(19.5, 9, 1242, 2688)">iPhone XS Max/11 Pro Max</button>
+                <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone XR/11</button>
+                <button onclick="setInputValue(19.5, 9, 1125, 2436)">iPhone 11 Pro</button>
+                <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone 11</button>
+                <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone SE 2020</button>
+                <button onclick="setInputValue(19.5, 9, 1170, 2532)">iPhone 12/12 Pro</button>
+                <button onclick="setInputValue(19.5, 9, 1284, 2778)">iPhone 12 Pro Max</button>
+                <h4>Standar Resolusi Layar</h4>
+                <button onclick="setInputValue(8, 5, 320, 200)">CGA</button>
+                <button onclick="setInputValue(4, 3, 320, 240)">VGA</button>
+                <button onclick="setInputValue(5, 3, 800, 480)">WVGA</button>
+                <button onclick="setInputValue(16, 9, 854, 480)">FWVGA</button>
+                <button onclick="setInputValue(5, 4, 320, 256)">QVGA</button>
+                <button onclick="setInputValue(4, 3, 768, 576)">PAL</button>
+                <button onclick="setInputValue(4, 3, 800, 600)">SVGA</button>
+                <button onclick="setInputValue(4, 3, 1024, 768)">XGA</button>
+                <button onclick="setInputValue(16, 10, 1280, 800)">WXGA</button>
+                <button onclick="setInputValue(16, 9, 1280, 720)">HD</button>
+                <button onclick="setInputValue(5, 4, 1280, 1024)">SXGA</button>
+                <button onclick="setInputValue(4, 3, 1400, 1050)">SXGA+</button>
+                <button onclick="setInputValue(16, 10, 1440, 900)">WXGA+</button>
+                <button onclick="setInputValue(16, 9, 1920, 1080)">Full HD</button>
+                <button onclick="setInputValue(4, 3, 1600, 1200)">UXGA</button>
+                <button onclick="setInputValue(16, 10, 1920, 1200)">WUXGA</button>
+                <button onclick="setInputValue(16, 9, 2560, 1440)">2K</button>
+                <button onclick="setInputValue(4, 3, 2048, 1536)">QXGA</button>
+                <button onclick="setInputValue(16, 10, 2560, 1600)">WQXGA</button>
+                <button onclick="setInputValue(16, 9, 3840, 2160)">4K</button>
+                <button onclick="setInputValue(16, 10, 3840, 2400)">WQUXGA</button>
+                <button onclick="setInputValue(5, 4, 2560, 2048)">QSXGA</button>
             </div>
-            <div class="wrapper-3">
-                <label for="height">height:</label>
-                <input type="number" id="height" value="720" />
+            <div class="maincalc">
+                <h2>
+                    <span>Kalkulator <br> </span> Aspek Rasio
+                </h2>
+        
+                <button id="toggle-mode">Gunakan Ukuran Layar</button>
+                <p>Mode: <span id="mode-text">Aspek Rasio</span></p>
+        
+                <div class="wrapper-1">
+                    <input type="number" id="ratio-width" value="16" />
+                    <span>:</span>
+                    <input type="number" id="ratio-height" value="9" />
+                </div>
+        
+                <div class="box">
+                    <div class="wrapper-2">
+                        <label for="width">Panjang:</label>
+                        <input type="number" id="width" value="1280" />
+                    </div>
+                    <div class="wrapper-3">
+                        <label for="height">Lebar:</label>
+                        <input type="number" id="height" value="720" />
+                    </div>
+                    <div class="wrapper-4">
+                        <label for="diagonal">Diagonal (inci):</label>
+                        <input type="number" id="diagonal" value="15.6" disabled />
+                    </div>
+                </div>
             </div>
+        
         </div>
+    
+        </div>
+    </section>
+    <section class="info">
+        <div class="info-container">
+            <section class="section">
+                <div class="text">
+                    <h2>Kalkulator Apa Ini?</h2>
+                    <hr>
+                    <p>
+                        Kalkulator ini membantu Anda
+                        menghitung tinggi dan lebar dari elemen HTML yang memiliki aspek rasio tertentu. Misalnya, Anda memiliki elemen dengan aspek rasio 16:9 dan lebar 1280px, maka tinggi elemen tersebut adalah 720px.
+                    </p>
+                </div>
+                <img src="assets/ratio-tool.png" alt="Ilustrasi kalkulator">
+            </section>
+            
+            <section class="section">
+                <img src="assets/ratio-aspect.png" alt="Ilustrasi aspek rasio">
+                <div class="text">
+                    <h2>Apa Itu Aspek Rasio?</h2>
+                    <hr>
+                    <p>
+                        Aspek rasio adalah perbandingan antara lebar dan tinggi dari elemen. Misalnya, aspek rasio 16:9 berarti elemen tersebut memiliki lebar 16 unit dan tinggi 9 unit. <br><br>
+                        Aspek rasio mempengaruhi bagaimana konten ditampilkan pada layar. Misalnya, jika Anda menonton film yang dibuat dalam aspek rasio 16:9 pada layar dengan aspek rasio 4:3, Anda akan melihat bilah hitam di atas dan bawah layar (disebut letterboxing) untuk menyesuaikan perbedaan rasio.
+                        16:9</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="text">
+                    <h2>Bagaimana Cara Menggunakannya?</h2>
+                    <hr>
+                    <h4>Untuk Mode Rasio Aspek</h4>
+                    <ul>
+                        <li>Masukkan nilai aspek rasio (misalnya, 16:9).</li>
+                        <li>Masukkan nilai lebar atau tinggi elemen (misalnya, 1280px).</li>
+                        <li>Kalkulator akan menghitung nilai tinggi atau lebar elemen berdasarkan aspek rasio yang dimasukkan.</li>
+                    </ul>
+                    <br>
+                    <h4>Untuk Mode Ukuran Layar</h4>
+                    <ul>
+                        <li>Masukkan nilai diagonal layar.</li>
+                        <li>Masukkan nilai aspek rasio (misalnya, 16:9).</li>
+                        <li>Kalkulator akan menghitung nilai aspek rasio layar berdasarkan nilai yang dimasukkan.</li>
+                    </ul>
+                </div>
+                <img src="assets/usage.png" alt="Cara menggunakan kalkulator">
+            </section>
+            
+            <section class="section">
+                <img src="assets/ratio-others.png" alt="Keuntungan menggunakan kalkulator">
+                <div class="text">
+                    <h2>Tidak Hanya untuk Mengukur Layar!</h2>
+                    <hr>
+                    <p>
+                        Kalkulator ini tidak hanya berguna untuk menghitung ukuran layar, tetapi juga dapat digunakan untuk menghitung ukuran elemen HTML lainnya, seperti gambar, video, dan elemen lainnya. <br><br>
+                        Dengan menggunakan kalkulator ini, Anda dapat dengan mudah menyesuaikan ukuran elemen HTML Anda dengan aspek rasio yang diinginkan, sehingga konten Anda akan terlihat lebih baik dan lebih konsisten di berbagai perangkat. <br><br>
+                        Karena menggunakan konsep perbandingan senilai, kalkulator ini juga dapat digunakan untuk menghitung ukuran skala peta, perbandingan panjang dan lebar, dan banyak
+                        lagi.</p>
+                </div>
+            </section>
+            
+            <section class="our-team">
+                <h2>Meet Our Team!</h2>
+                <p>Kalo penasaran nama asli mereka, arahkan kursor melayang di atas nama mereka!</p>
+                <hr>
+                <div class="team-members">
+                    <div class="member">
+                        <img src="assets/Untitled-pp-kura2.png" alt="@sean372_id">
+                        <h3 title="Fauzan Haziq Yuwono">Sean</h3>
+                        <p>Kura-Kura kelahiran 19 Juni 2008 asli Bekasi Selatan, dari PPI. Saking gabutnya, kadang ia suka ngoding, ngegame, ngambar, nulis. Cita-cita kerja di Canva 😊. Suka makan Kebab.</p><br>
+                        <a href="https://www.instagram.com/sean372_id/" target="_blank">(@sean372_id)</a>
+                    </div>
+                    <div class="member">
+                        <img src="assets/449430474_488591127170590_4246937989319574678_n.jpg" alt="@abdrhmn_ammar09">
+                        <h3 title="Muammar Abdurrahman">Ammar</h3>
+                        <p>Lahir di Tasikmalaya pada 19 Mei 2009. Tinggal di Majalengka. Hobinya maen Badminton. Cita-cita dokter spesialis radiologi. Makanan kesukaannya Crombolini</p><br>
+                        <a href="https://www.instagram.com/abdrhmn_ammar09/" target="_blank">(@abdrhmn_ammar09)</a>
+                    </div>
+                    <div class="member">
+                        <img src="assets/470983104_563984436499379_8879270330005545356_n.jpg" alt="@gibrahimmo_">
+                        <h3 title="Gibral Ibrahim Utomo">GB</h3>
+                        <p>Manusia asal Subang yang suka makan, karena bingung mau olahraga apa. Tinggal di Griya Cinangsi Asri Kecamatan Cibogo. Cita-cita bisa beli barang tanpa liat harga.</p><br>
+                        <a href="https://www.instagram.com/gibrahimmo_/" target="_blank">(@gibrahimmo_)</a>
+                    </div>
+                    <div class="member">
+                        <img src="avatar.jpg" alt="Avatar">
+                        <h3 title="Fawwaz Abdurrahman Yudiarsah">AB</h3>
+                        <p>Deskripsi singkat...</p>
+                        <a href="#">(@???)</a>
+                    </div>
+                    <div class="member">
+                        <img src="assets/461636245_1036632207949592_6602721491265580985_n.jpg" alt="@azkan_nashabi">
+                        <h3 title="Muhammad Azkan Nashabi">Abob</h3>
+                        <p>Deskripsi singkat...</p>
+                        <a href="https://www.instagram.com/azkan_nashabi/" target="_blank">(@azkan_nashabi)</a>
+                    </div>
+                    <div class="member">
+                        <img src="assets/472442218_1974297113080444_7074098971920998545_n.jpg" alt="@hanabran__">
+                        <h3 title="Hanan Zabran">Habok</h3>
+                        <p>Deskripsi singkat...</p>
+                        <a href="https://www.instagram.com/hanabran__/" target="_blank">(@hanabran__)</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
     <script src="script.js"></script> 
 </body>
 </html>

@@ -2,14 +2,40 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
 }
-body {
-    background-color: #895cf3;
+
+hr {
+    border: solid 2px;
+    margin: 10px 0;
+    }
+
+section.aspect-ratio-calculator {
+    background: rgb(226,245,255);
+    background: linear-gradient(47deg, rgba(226,245,255,1) 0%, rgba(234,247,255,1) 100%);
+    width: 100%;
+    height: 100vh;
+    display: block;
+    overflow: hidden;
 }
-.container {
-    width: 500px;
-    background-color: #ffffff;
+section.info {
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.calc-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 70%;
+    height: 80%;
+    background-color: #e6e6e696;
     padding: 80px 40px;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -18,21 +44,48 @@ body {
     border-radius: 10px;
     box-shadow: 0 30px 45px rgba(18, 8, 39, 0.2);
 }
+.presets {
+    max-width: 50%;
+    height: auto;
+    overflow-y: scroll;
+}
+
+button {
+    width: auto;
+    height: 30px;
+    padding: 0 8px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    margin: 6px 3px;
+    border-radius: 10px;
+    background-color: #fefefe;
+    transition: 200ms;
+}
+
+.presets button:focus {
+    color: #ffffff;
+    background-color: #0067C0;
+}
+
+button:hover {
+    background-color: #ffffff;
+}
+
 h2 {
-    text-align: center;
+    text-align: left;
     font-size: 40px;
-    line-height: 1.6;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: bold;
+    letter-spacing: auto;
 }
 h2 span {
-    color: #895cf3;
+    color: #0067C0;
 }
 .wrapper-1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 50px 0 70px 0;
+    margin: 20px 0 50px 0;
     gap: 10px;
 }
 .wrapper-1 input {
@@ -42,14 +95,20 @@ h2 span {
 }
 input {
     padding: 15px 10px;
-    border: 1px solid #bbc0c5;
+    border: 0.5px solid #bbc0c5;
+    border-bottom: 3px solid #bbc0c5;
     border-radius: 5px;
-    color: #170444;
     outline: none;
+    transition: 200ms;
 }
 input:focus {
-    border: 2px solid #895cf3;
+    border-bottom: 3px solid #0067C0;
 }
+
+input:disabled {
+    background-color: #cdcdcd;
+}
+
 label {
     color: #170444;
     font-weight: 600;
@@ -61,13 +120,111 @@ label {
     gap: 30px;
 }
 .wrapper-2,
-.wrapper-3 {
+.wrapper-3,
+.wrapper-4 {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 .wrapper-2 input,
-.wrapper-3 input {
+.wrapper-3 input,
+.wrapper-4 input {
     width: 100%;
     font-size: 18px;
+}
+
+/* section.info {
+    /* margin: 50px; */
+    /* width: 100vw; 
+    display: flex;
+    justify-content: center;
+} */
+
+.info-container {
+    max-width: 1300px;
+    padding: 20px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section .text {
+    flex: 1;
+    padding: 10px;
+}
+
+/* .section:nth-child(odd) .text {
+    text-align: right;
+} */
+
+.section img {
+    width: 50%;
+    height: auto;
+    margin-right: 20px;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+.our-team {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.member {
+    text-align: center;
+    width: 180px;
+}
+
+.member h3 {
+    cursor: help;
+}
+
+.member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+
+    .calc-container {
+        width: 90%;
+        height: 95%;
+        flex-direction: column-reverse;
+        padding: 40px 25px;
+    }   
+
+    .presets {
+        height: 30%;
+        max-width: 100%;
+    }
+
+    .section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section:nth-child(even) {
+        flex-direction: column-reverse
+    }
+
+    .section img {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
 }
