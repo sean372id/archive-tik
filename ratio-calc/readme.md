@@ -1,7 +1,6 @@
 # PROYEK TIK KELAS 10 UTSMAN KELOMPOK 10: KALKULATOR RASIO ASPEK
 
-<iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-src="https://www.canva.com/design/DAGfgMcq2fA/hQiDFKwR5jUX3tvQIVo-Ow/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+![PPT CANVA](https://www.canva.com/design/DAGfgMcq2fA/hQiDFKwR5jUX3tvQIVo-Ow/view?embed)
 </iframe>
 
 Proyek ini ditujukan untuk memenuhi tugas Guru Pak Ais
