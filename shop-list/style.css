@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' -25,
+  'opsz' 48;
+  color: #000;
+}
+
+
+body {
+    background-color: #faf9f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pricelist {
+    width: 100%;
+    height: 80%;
+    border: solid 1px #ccc;
+}
+
+.item-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.item-list label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-list input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.item-list input.qty {
+    width: 30%;
+}
+
+button.delete-item {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.cpanel {
+    display: flex;
+    flex-direction: column;
+    gap: ;
+    margin-top: 20px;
+}
+
+.cpanel button {
+    padding: 10px 20px;
+    background-color: #cc785c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cpanel .grandtotal {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
