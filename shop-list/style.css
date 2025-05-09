@@ -1,36 +1,46 @@
+:root {
+
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';;
 }
-
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 700,
-  'GRAD' -25,
-  'opsz' 48;
-  color: #000;
-}
-
 
 body {
     background-color: #faf9f5;
     color: #333;
 }
 
+.printonly {
+    display: none;
+}
+
+hr {
+    border-top: 2px solid #000;
+    margin: 20px 0;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    justify-content: center;
 }
 
 .pricelist {
     width: 100%;
-    height: 80%;
-    border: solid 1px #ccc;
+    height: 80vh;
+    overflow: auto;
 }
 
 .item-list {
@@ -59,16 +69,25 @@ body {
 
 button.delete-item {
     background-color: transparent;
-    color: white;
+    color: black;
     border: none;
+    font-size: 30px;
     cursor: pointer;
 }
 
 .cpanel {
+    position: fixed;
+    z-index: 1000;
+    height: 2opx;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: ;
-    margin-top: 20px;
+    gap: 10px;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background-color: #faf9f5;
 }
 
 .cpanel button {
@@ -85,4 +104,44 @@ button.delete-item {
     display: flex;
     flex-direction: row;
     gap: 5px;
+}
+
+
+
+/* Media Print Queries */
+@media print {
+    body {
+        background-color: white;
+    }
+
+    .printonly {
+        display: block;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .pricelist {
+        height: auto;
+        border: none;
+    }
+
+    .item-list input {
+        border: none;
+        background-color: transparent;
+    }
+
+    button.delete-item {
+        display: none;
+    }
+
+    .cpanel {
+        position: relative;
+    }
+
+    .cpanel button {
+        display: none;
+    }
+
 }

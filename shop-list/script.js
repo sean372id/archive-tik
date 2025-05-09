@@ -1,6 +1,26 @@
 // Fungsi inisialisasi
+autoDateField = document.getElementById('date');
 document.getElementById('price-1').addEventListener('input', calculateTotalPrice);
 document.getElementById('qty-1').addEventListener('input', calculateTotalPrice);
+
+
+function autoDate() {
+    const date = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    };
+    const formattedDate = date.toLocaleDateString('id-ID', options);
+    document.getElementById('date').textContent = formattedDate;
+}
+
+// Panggil fungsi autoDate saat halaman dimuat
+document.addEventListener('DOMContentLoaded', autoDate);
+
 
 function addItem() {
     const itemlist = document.getElementById('item-list');
@@ -42,7 +62,7 @@ function addItem() {
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-item');
     deleteButton.id = `delete-${counter}`;
-    deleteButton.innerHTML = '<span class="material-symbols-outlined">close</span>';
+    deleteButton.innerHTML = '×';
     deleteButton.addEventListener('click', () => deleteItem(counter));
 
     // Masukkan elemen-elemen ke dalam div baru
@@ -103,4 +123,9 @@ function updateLabels() {
         const newDeleteButton = item.querySelector('button.delete-item');
         newDeleteButton.addEventListener('click', () => deleteItem(newCounter));
     });
+}
+
+// Fungsi untuk mencetak ke printer
+function printToPrinter() {
+    window.print();
 }

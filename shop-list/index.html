@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Pencatat Belanjaan</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 class="printonly title">Catatan Belanjaan</h1>
+    <p class="printonly">Dibuat pada tanggal: <span id="date"></span></p>
+    <hr class="printonly">
     <div class="container pricelist" id="item-list">
         <div class="item-list">
             <label for="item-1">1</label>
             <input type="text" name="desc-1" id="desc-1">
             <input type="number" name="price-1" id="price-1">
             <input type="number" class="qty" name="qty-1" id="qty-1" value="1" min="1">
-            <button class="delete-item" id="delete-1" onclick="deleteItem(1)"><span class="material-symbols-outlined">
-                close
-                </span></button>
+            <button class="delete-item" id="delete-1" onclick="deleteItem(1)">×</button>
         </div>
     </div>
+    <hr class="printonly">
     <div class="container cpanel">
         <button id="add-item" onclick="addItem()">+ Tambah Item</button>
         <div class="grandtotal">
             <h2>Total Harga: Rp</h2>
             <h2 id="total-price">0</h2>
+            <!-- <button class="print-button" onclick="printToPrinter()">Cetak</button> -->
         </div>
     </div>
     <script src="script.js"></script>
