@@ -4,6 +4,8 @@
     --primary-color: #cc785c;
     --secondary-color: #f0f0f0;
     --border-color: #ccc;
+    --inverted-color: #333;
+    --inverted-text-color: #faf9f5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +15,8 @@
         --primary-color: #cc785c;
         --secondary-color: #444;
         --border-color: #555;
+        --inverted-color: #faf9f5;
+        --inverted-text-color: #333;
     }
 }   
 
@@ -47,7 +51,7 @@ hr {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
     justify-content: center;
 }
 
@@ -78,6 +82,7 @@ hr {
 
 .item-list-header > label:last-child {
     width: 30%;
+    margin-right: 30px;
 }
 
 
@@ -112,9 +117,11 @@ hr {
 button.delete-item {
     background-color: transparent;
     color: var(--text-color);
+    padding: 8px 0;
     border: none;
-    font-size: 30px;
     cursor: pointer;
+    font-size: 30px;
+    transition: 500ms;
 }
 
 .cpanel {
@@ -139,6 +146,7 @@ button.delete-item {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: 500ms;
 }
 
 .cpanel .grandtotal {
@@ -147,6 +155,34 @@ button.delete-item {
     gap: 5px;
 }
 
+button.print-button {
+    background-color: var(--inverted-color);
+    color: var(--inverted-text-color);
+    padding: 8px 10px;
+    margin-left: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+#clear-item {
+    background-color: var(--inverted-color);
+    color: var(--inverted-text-color);
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.print-button:active {
+    transform: scale(0.90);
+}
+
+#clear-item:active {
+    transform: scale(0.90);
+}
 
 
 /* Media Print Queries */
@@ -171,6 +207,7 @@ button.delete-item {
     .item-list input {
         border: none;
         background-color: transparent;
+        font-size: 20px;
     }
 
     button.delete-item {

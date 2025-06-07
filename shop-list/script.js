@@ -74,6 +74,9 @@ function addItem() {
 
     // Tambahkan div baru ke dalam item-list
     itemlist.appendChild(newItem);
+
+    updateLabels(); // Perbarui label dan ID setelah item ditambahkan
+    saveItemsToStorage(); // Simpan data ke localStorage
 }
 
 function calculateTotalPrice() {
@@ -124,6 +127,111 @@ function updateLabels() {
         newDeleteButton.addEventListener('click', () => deleteItem(newCounter));
     });
 }
+
+// Simpan data ke localStorage
+function saveItemsToStorage() {
+    const items = [];
+    document.querySelectorAll('.item-list').forEach(item => {
+        items.push({
+            desc: item.querySelector('input[type="text"]').value,
+            price: item.querySelector('input[type="number"][name^="price"]').value,
+            qty: item.querySelector('input[type="number"].qty').value
+        });
+    });
+    localStorage.setItem('shopItems', JSON.stringify(items));
+}
+
+// Muat data dari localStorage
+function loadItemsFromStorage() {
+    const items = JSON.parse(localStorage.getItem('shopItems') || '[]');
+    const itemlist = document.getElementById('item-list');
+    itemlist.innerHTML = ''; // Kosongkan dulu
+    items.forEach((item, idx) => {
+        const counter = idx + 1;
+        const newItem = document.createElement('div');
+        newItem.className = 'item-list';
+
+        const label = document.createElement('label');
+        label.setAttribute('for', `item-${counter}`);
+        label.textContent = counter;
+
+        const descInput = document.createElement('input');
+        descInput.type = 'text';
+        descInput.name = `desc-${counter}`;
+        descInput.id = `desc-${counter}`;
+        descInput.value = item.desc;
+
+        const priceInput = document.createElement('input');
+        priceInput.type = 'number';
+        priceInput.name = `price-${counter}`;
+        priceInput.id = `price-${counter}`;
+        priceInput.value = item.price;
+        priceInput.addEventListener('input', () => {
+            calculateTotalPrice();
+            saveItemsToStorage();
+        });
+
+        const qtyInput = document.createElement('input');
+        qtyInput.type = 'number';
+        qtyInput.classList.add('qty');
+        qtyInput.name = `qty-${counter}`;
+        qtyInput.id = `qty-${counter}`;
+        qtyInput.value = item.qty;
+        qtyInput.min = 1;
+        qtyInput.addEventListener('input', () => {
+            calculateTotalPrice();
+            saveItemsToStorage();
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-item');
+        deleteButton.id = `delete-${counter}`;
+        deleteButton.innerHTML = '×';
+        deleteButton.addEventListener('click', () => deleteItem(counter));
+
+        newItem.appendChild(label);
+        newItem.appendChild(descInput);
+        newItem.appendChild(priceInput);
+        newItem.appendChild(qtyInput);
+        newItem.appendChild(deleteButton);
+
+        itemlist.appendChild(newItem);
+    });
+    calculateTotalPrice();
+}
+
+// Hapus semua data dari localStorage dan halaman
+function clearAllItems() {
+    localStorage.removeItem('shopItems');
+    const itemlist = document.getElementById('item-list');
+    itemlist.innerHTML = `
+        <div class="item-list-header">
+            <label for="no">No</label>
+            <label for="item">Nama Item</label>
+            <label for="price">Harga</label>
+            <label for="qty">Jumlah</label>
+        </div>
+        <div class="item-list">
+            <label for="item-1">1</label>
+            <input type="text" name="desc-1" id="desc-1">
+            <input type="number" name="price-1" id="price-1">
+            <input type="number" class="qty" name="qty-1" id="qty-1" value="1" min="1">
+            <button class="delete-item" id="delete-1" onclick="deleteItem(1)">×</button>
+        </div>
+    `;
+    calculateTotalPrice();
+}
+
+// Tambahkan pemanggilan saveItemsToStorage pada perubahan data
+document.addEventListener('input', function(e) {
+    if (
+        e.target.matches('input[type="text"]') ||
+        e.target.matches('input[type="number"][name^="price"]') ||
+        e.target.matches('input[type="number"].qty')
+    ) {
+        saveItemsToStorage();
+    }
+});
 
 // Fungsi untuk mencetak ke printer
 function printToPrinter() {
