@@ -1,8 +1,16 @@
 // Fungsi inisialisasi
-autoDateField = document.getElementById('date');
-document.getElementById('price-1').addEventListener('input', calculateTotalPrice);
-document.getElementById('qty-1').addEventListener('input', calculateTotalPrice);
-
+document.addEventListener('DOMContentLoaded', () => {
+    loadItemsFromStorage();
+    autoDate();
+    document.getElementById('add-item').addEventListener('click', addItem);
+    document.getElementById('clear-item').addEventListener('click', clearAllItems);
+    document.getElementById('item-list').addEventListener('input', (e) => {
+        if (e.target.matches('input')) {
+            calculateTotalPrice();
+            saveItemsToStorage();
+        }
+    });
+});
 
 function autoDate() {
     const date = new Date();
@@ -18,65 +26,24 @@ function autoDate() {
     document.getElementById('date').textContent = formattedDate;
 }
 
-// Panggil fungsi autoDate saat halaman dimuat
-document.addEventListener('DOMContentLoaded', autoDate);
-
-
 function addItem() {
     const itemlist = document.getElementById('item-list');
-    const counter = itemlist.childElementCount + 1; // Hitung jumlah elemen anak dan tambahkan 1 untuk elemen baru
+    const counter = itemlist.querySelectorAll('.item-list').length + 1;
 
-    // Buat elemen div baru untuk item
     const newItem = document.createElement('div');
     newItem.className = 'item-list';
+    newItem.dataset.id = counter;
 
-    // Tambahkan elemen label
-    const label = document.createElement('label');
-    label.setAttribute('for', `item-${counter}`);
-    label.textContent = counter;
+    newItem.innerHTML = `
+        <label for="item-${counter}">${counter}</label>
+        <input type="text" name="desc-${counter}" id="desc-${counter}">
+        <input type="number" name="price-${counter}" id="price-${counter}">
+        <input type="number" class="qty" name="qty-${counter}" id="qty-${counter}" value="1" min="1">
+        <button class="delete-item" onclick="deleteItem(${counter})">×</button>
+    `;
 
-    // Tambahkan input untuk deskripsi
-    const descInput = document.createElement('input');
-    descInput.type = 'text';
-    descInput.name = `desc-${counter}`;
-    descInput.id = `desc-${counter}`;
-
-    // Tambahkan input untuk harga
-    const priceInput = document.createElement('input');
-    priceInput.type = 'number';
-    priceInput.name = `price-${counter}`;
-    priceInput.id = `price-${counter}`;
-    priceInput.addEventListener('input', calculateTotalPrice);
-
-    // Tambahkan input jumlah item
-    const qtyInput = document.createElement('input');
-    qtyInput.type = 'number';
-    qtyInput.classList.add('qty');
-    qtyInput.name = `qty-${counter}`;
-    qtyInput.id = `qty-${counter}`;
-    qtyInput.value = 1;
-    qtyInput.min = 1;
-    qtyInput.addEventListener('input', calculateTotalPrice);
-
-    // Tambahkan tombol buang item
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-item');
-    deleteButton.id = `delete-${counter}`;
-    deleteButton.innerHTML = '×';
-    deleteButton.addEventListener('click', () => deleteItem(counter));
-
-    // Masukkan elemen-elemen ke dalam div baru
-    newItem.appendChild(label);
-    newItem.appendChild(descInput);
-    newItem.appendChild(priceInput);
-    newItem.appendChild(qtyInput);
-    newItem.appendChild(deleteButton);
-
-    // Tambahkan div baru ke dalam item-list
     itemlist.appendChild(newItem);
-
-    updateLabels(); // Perbarui label dan ID setelah item ditambahkan
-    saveItemsToStorage(); // Simpan data ke localStorage
+    saveItemsToStorage();
 }
 
 function calculateTotalPrice() {
@@ -94,146 +61,100 @@ function calculateTotalPrice() {
     document.getElementById('total-price').textContent = total;
 }
 
-function deleteItem(counter) {
-    const itemToDelete = document.getElementById(`delete-${counter}`).parentElement;
-    itemToDelete.remove();
-    updateLabels(); // Perbarui label dan ID setelah item dihapus
-    calculateTotalPrice(); // Hitung ulang total harga
+function deleteItem(id) {
+    const itemToDelete = document.querySelector(`.item-list[data-id='${id}']`);
+    if (itemToDelete) {
+        itemToDelete.remove();
+        updateLabels();
+        calculateTotalPrice();
+        saveItemsToStorage();
+    }
 }
 
 function updateLabels() {
     const items = document.querySelectorAll('.item-list');
     items.forEach((item, index) => {
+        const newCounter = index + 1;
         const label = item.querySelector('label');
-        const priceInput = item.querySelector('input[type="number"][name^="price"]');
-        const qtyInput = item.querySelector('input[type="number"].qty');
-        const descInput = item.querySelector('input[type="text"]');
         const deleteButton = item.querySelector('button.delete-item');
 
-        const newCounter = index + 1; // Perbarui nomor urut
+        item.dataset.id = newCounter;
         label.textContent = newCounter;
         label.setAttribute('for', `item-${newCounter}`);
-        descInput.name = `desc-${newCounter}`;
-        descInput.id = `desc-${newCounter}`;
-        priceInput.name = `price-${newCounter}`;
-        priceInput.id = `price-${newCounter}`;
-        qtyInput.name = `qty-${newCounter}`;
-        qtyInput.id = `qty-${newCounter}`;
-        deleteButton.id = `delete-${newCounter}`;
-
-        // Hapus event listener lama dan tambahkan yang baru
-        deleteButton.replaceWith(deleteButton.cloneNode(true));
-        const newDeleteButton = item.querySelector('button.delete-item');
-        newDeleteButton.addEventListener('click', () => deleteItem(newCounter));
+        item.querySelector('input[type="text"]').name = `desc-${newCounter}`;
+        item.querySelector('input[type="text"]').id = `desc-${newCounter}`;
+        item.querySelector('input[type="number"][name^="price"]').name = `price-${newCounter}`;
+        item.querySelector('input[type="number"][name^="price"]').id = `price-${newCounter}`;
+        item.querySelector('input[type="number"].qty').name = `qty-${newCounter}`;
+        item.querySelector('input[type="number"].qty').id = `qty-${newCounter}`;
+        deleteButton.setAttribute('onclick', `deleteItem(${newCounter})`);
     });
 }
 
-// Simpan data ke localStorage
 function saveItemsToStorage() {
     const items = [];
     document.querySelectorAll('.item-list').forEach(item => {
-        items.push({
-            desc: item.querySelector('input[type="text"]').value,
-            price: item.querySelector('input[type="number"][name^="price"]').value,
-            qty: item.querySelector('input[type="number"].qty').value
-        });
+        const descInput = item.querySelector('input[type="text"]');
+        const priceInput = item.querySelector('input[type="number"][name^="price"]');
+        const qtyInput = item.querySelector('input[type="number"].qty');
+
+        if (descInput && priceInput && qtyInput) {
+            items.push({
+                desc: descInput.value,
+                price: priceInput.value,
+                qty: qtyInput.value
+            });
+        }
     });
     localStorage.setItem('shopItems', JSON.stringify(items));
 }
 
-// Muat data dari localStorage
 function loadItemsFromStorage() {
     const items = JSON.parse(localStorage.getItem('shopItems') || '[]');
     const itemlist = document.getElementById('item-list');
-    itemlist.innerHTML = ''; // Kosongkan dulu
-    items.forEach((item, idx) => {
-        const counter = idx + 1;
-        const newItem = document.createElement('div');
-        newItem.className = 'item-list';
+    
+    // Clear existing items except the header
+    const header = itemlist.querySelector('.item-list-header');
+    itemlist.innerHTML = '';
+    if (header) {
+        itemlist.appendChild(header);
+    }
 
-        const label = document.createElement('label');
-        label.setAttribute('for', `item-${counter}`);
-        label.textContent = counter;
+    if (items.length === 0) {
+        // Add a default item if storage is empty
+        addItem();
+    } else {
+        items.forEach((item, idx) => {
+            const counter = idx + 1;
+            const newItem = document.createElement('div');
+            newItem.className = 'item-list';
+            newItem.dataset.id = counter;
 
-        const descInput = document.createElement('input');
-        descInput.type = 'text';
-        descInput.name = `desc-${counter}`;
-        descInput.id = `desc-${counter}`;
-        descInput.value = item.desc;
-
-        const priceInput = document.createElement('input');
-        priceInput.type = 'number';
-        priceInput.name = `price-${counter}`;
-        priceInput.id = `price-${counter}`;
-        priceInput.value = item.price;
-        priceInput.addEventListener('input', () => {
-            calculateTotalPrice();
-            saveItemsToStorage();
+            newItem.innerHTML = `
+                <label for="item-${counter}">${counter}</label>
+                <input type="text" name="desc-${counter}" id="desc-${counter}" value="${item.desc}">
+                <input type="number" name="price-${counter}" id="price-${counter}" value="${item.price}">
+                <input type="number" class="qty" name="qty-${counter}" id="qty-${counter}" value="${item.qty}" min="1">
+                <button class="delete-item" onclick="deleteItem(${counter})">×</button>
+            `;
+            itemlist.appendChild(newItem);
         });
-
-        const qtyInput = document.createElement('input');
-        qtyInput.type = 'number';
-        qtyInput.classList.add('qty');
-        qtyInput.name = `qty-${counter}`;
-        qtyInput.id = `qty-${counter}`;
-        qtyInput.value = item.qty;
-        qtyInput.min = 1;
-        qtyInput.addEventListener('input', () => {
-            calculateTotalPrice();
-            saveItemsToStorage();
-        });
-
-        const deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-item');
-        deleteButton.id = `delete-${counter}`;
-        deleteButton.innerHTML = '×';
-        deleteButton.addEventListener('click', () => deleteItem(counter));
-
-        newItem.appendChild(label);
-        newItem.appendChild(descInput);
-        newItem.appendChild(priceInput);
-        newItem.appendChild(qtyInput);
-        newItem.appendChild(deleteButton);
-
-        itemlist.appendChild(newItem);
-    });
+    }
     calculateTotalPrice();
 }
 
-// Hapus semua data dari localStorage dan halaman
 function clearAllItems() {
     localStorage.removeItem('shopItems');
     const itemlist = document.getElementById('item-list');
-    itemlist.innerHTML = `
-        <div class="item-list-header">
-            <label for="no">No</label>
-            <label for="item">Nama Item</label>
-            <label for="price">Harga</label>
-            <label for="qty">Jumlah</label>
-        </div>
-        <div class="item-list">
-            <label for="item-1">1</label>
-            <input type="text" name="desc-1" id="desc-1">
-            <input type="number" name="price-1" id="price-1">
-            <input type="number" class="qty" name="qty-1" id="qty-1" value="1" min="1">
-            <button class="delete-item" id="delete-1" onclick="deleteItem(1)">×</button>
-        </div>
-    `;
+    const header = itemlist.querySelector('.item-list-header');
+    itemlist.innerHTML = '';
+    if (header) {
+        itemlist.appendChild(header);
+    }
+    addItem(); // Add a single empty item
     calculateTotalPrice();
 }
 
-// Tambahkan pemanggilan saveItemsToStorage pada perubahan data
-document.addEventListener('input', function(e) {
-    if (
-        e.target.matches('input[type="text"]') ||
-        e.target.matches('input[type="number"][name^="price"]') ||
-        e.target.matches('input[type="number"].qty')
-    ) {
-        saveItemsToStorage();
-    }
-});
-
-// Fungsi untuk mencetak ke printer
 function printToPrinter() {
     window.print();
 }
