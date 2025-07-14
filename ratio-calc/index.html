@@ -6,11 +6,13 @@
         <meta property="og:description" content="Halo! Kalkulator ini membantu Anda menghitung tinggi dan lebar dari elemen HTML yang memiliki aspek rasio tertentu. Misalnya, Anda memiliki elemen dengan aspek rasio 16:9 dan lebar 1280px, maka tinggi elemen tersebut adalah 720px." />
         <meta property="og:url" content="https://sean372id.github.io/archive-tik/ratio-calc/" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://sean372id.github.io/archive-tik/ratio-calc/assets/ratio-tool.png" />
     
         <!-- Meta Tag Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kalkulator Aspek Rasio" />
         <meta name="twitter:description" content="Halo! Kalkulator ini membantu Anda menghitung tinggi dan lebar dari elemen HTML yang memiliki aspek rasio tertentu. Misalnya, Anda memiliki elemen dengan aspek rasio 16:9 dan lebar 1280px, maka tinggi elemen tersebut adalah 720px." />
+        <meta name="twitter:image" content="https://sean372id.github.io/archive-tik/ratio-calc/assets/ratio-tool.png" />
     
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +29,9 @@
                     <h2>Preset</h2>
                     <h4>Standar Media Sosial</h4>
                     <button onclick="setInputValue(9, 16, 1080, 1920)">Instagram Stories & Reels</button>
-                    <button onclick="setInputValue(4, 5, 1080, 1350)">Instagram Posts (New)</button>
-                    <button onclick="setInputValue(1, 1, 1080, 1080)">Instagram Posts (Old)</button>
+                    <button onclick="setInputValue(4, 5, 1013, 1350)">Instagram Posts (New 3:4)</button>
+                    <button onclick="setInputValue(4, 5, 1080, 1350)">Instagram Posts (Legacy 4:5)</button>
+                    <button onclick="setInputValue(1, 1, 1080, 1080)">Instagram Posts (Legacy Square)</button>
                     <button onclick="setInputValue(16, 9, 1920, 1080)">Youtube Video</button>
                     <button onclick="setInputValue(9, 16, 1080, 1920)">Youtube Shorts</button>
                     <button onclick="setInputValue(16, 9, 1080, 608)">Facebook Video</button>
@@ -44,14 +47,22 @@
                     <button onclick="setInputValue(16, 9, 1366, 768)">HD Monitor</button>
                     <button onclick="setInputValue(16, 9, 1080, 608)">HD Laptop</button>
                     <button onclick="setInputValue(16, 9, 750, 1334)">iPhone 6/7/8</button>
-                    <button onclick="setInputValue(19.5, 9, 1080, 2340)">iPhone X/XS/11 Pro</button>
-                    <button onclick="setInputValue(19.5, 9, 1242, 2688)">iPhone XS Max/11 Pro Max</button>
-                    <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone XR/11</button>
-                    <button onclick="setInputValue(19.5, 9, 1125, 2436)">iPhone 11 Pro</button>
-                    <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone 11</button>
-                    <button onclick="setInputValue(19.5, 9, 828, 1792)">iPhone SE 2020</button>
-                    <button onclick="setInputValue(19.5, 9, 1170, 2532)">iPhone 12/12 Pro</button>
-                    <button onclick="setInputValue(19.5, 9, 1284, 2778)">iPhone 12 Pro Max</button>
+                    <button onclick="setInputValue(19.5, 9, 2340, 1080)">iPhone X/XS/11 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 2688, 1242)">iPhone XS Max/11 Pro Max</button>
+                    <button onclick="setInputValue(19.5, 9, 1792, 828)">iPhone XR/11</button>
+                    <button onclick="setInputValue(19.5, 9, 2436, 1125)">iPhone 11 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 1792, 828)">iPhone 11</button>
+                    <button onclick="setInputValue(19.5, 9, 1792, 828)">iPhone SE 2020</button>
+                    <button onclick="setInputValue(19.5, 9, 2532, 1170)">iPhone 12/12 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 2778, 1284)">iPhone 12 Pro Max</button>
+                    <button onclick="setInputValue(19.5, 9, 2532, 1170)">iPhone 13/13 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 2778, 1284)">iPhone 13 Pro Max</button>
+                    <button onclick="setInputValue(19.5, 9, 2532, 1170)">iPhone 14/14 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 2796, 1290)">iPhone 14 Pro Max</button>
+                    <button onclick="setInputValue(19.5, 9, 2556, 1179)">iPhone 15/15 Pro</button>
+                    <button onclick="setInputValue(19.5, 9, 3100, 1440)">iPhone 15 Pro Max</button>
+                    <button onclick="setInputValue(16, 9, 1080, 2400)">Samsung Galaxy S20</button>
+                    <button onclick="setInputValue(20, 9, 1440, 3200)">Samsung Galaxy S21 Ultra</button>
                     <h4>Standar Resolusi Layar</h4>
                     <button onclick="setInputValue(8, 5, 320, 200)">CGA</button>
                     <button onclick="setInputValue(4, 3, 320, 240)">VGA</button>
@@ -75,6 +86,7 @@
                     <button onclick="setInputValue(16, 9, 3840, 2160)">4K</button>
                     <button onclick="setInputValue(16, 10, 3840, 2400)">WQUXGA</button>
                     <button onclick="setInputValue(5, 4, 2560, 2048)">QSXGA</button>
+                    <button onclick="setInputValue(16, 9, 5120, 2880)">5K</button>
                 </div>
                 <div class="maincalc">
                     <h2>

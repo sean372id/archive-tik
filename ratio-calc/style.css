@@ -1,10 +1,45 @@
+:root {
+    --static-background: rgb(226,245,255);
+    --background: linear-gradient(47deg, rgba(226,245,255,1) 0%, rgba(234,247,255,1) 100%);
+    --calc-container-bg: #e6e6e696;
+    --btn-background: #FBFBFB;
+    --btn-background-hover: #f0f0f0;
+    --inverted-color: #ffffff;
+    --accent-color: #0067C0;
+    --text-color: #000000;
+    --input-active-color: #f0f0f0;
+    --input-disabled-color: #fafafa;
+    --input-disabled-text-color: #b2b2b2;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --static-background: #050f1b;
+        --background: linear-gradient(47deg, #050f1b 0%, #0B1B3D 100%);
+        --calc-container-bg: #20202096;
+        --btn-background: #2B2B2B;
+        --btn-background-hover: #3A3A3A;
+        --inverted-color: #000000;
+        --accent-color: #4CC2FF;
+        --text-color: #ffffff;
+        --input-active-color: #1D1D1D;
+        --input-disabled-color: #343434;
+        --input-disabled-text-color: #767676;
+    }
+}
+
 * {
+    color: var(--text-color);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     overflow-x: hidden;
     scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--static-background);
 }
 
 hr {
@@ -13,8 +48,8 @@ hr {
     }
 
 section.aspect-ratio-calculator {
-    background: rgb(226,245,255);
-    background: linear-gradient(47deg, rgba(226,245,255,1) 0%, rgba(234,247,255,1) 100%);
+    background: var(--static-background);
+    background: var(--background);
     width: 100%;
     height: 100vh;
     display: block;
@@ -36,7 +71,7 @@ section.info {
     gap: 20px;
     width: 70%;
     height: 80%;
-    background-color: #e6e6e696;
+    background-color: var(--calc-container-bg);
     padding: 80px 40px;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -48,7 +83,7 @@ section.info {
 .presets {
     max-width: 50%;
     height: auto;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 button {
@@ -60,27 +95,29 @@ button {
     outline: none;
     margin: 6px 3px;
     border-radius: 10px;
-    background-color: #fefefe;
+    background-color: var(--btn-background);
     transition: 200ms;
 }
 
-.presets button:focus {
-    color: #ffffff;
-    background-color: #0067C0;
+button:hover {
+    background-color: var(--btn-background-hover);
 }
 
-button:hover {
-    background-color: #ffffff;
+.presets button:focus {
+    background-color: var(--accent-color);
+    color: var(--inverted-color);
 }
+
 
 h2 {
     text-align: left;
     font-size: 40px;
     font-weight: bold;
-    letter-spacing: auto;
+    line-height: 40px;
+    overflow: hidden;
 }
 h2 span {
-    color: #0067C0;
+    color: var(--accent-color);
 }
 .wrapper-1 {
     display: flex;
@@ -96,22 +133,25 @@ h2 span {
 }
 input {
     padding: 15px 10px;
-    border: 0.5px solid #bbc0c5;
-    border-bottom: 3px solid #bbc0c5;
+    border: 0.5px solid var(--btn-background);
+    border-bottom: 2px solid #bbc0c5;
     border-radius: 5px;
     outline: none;
     transition: 200ms;
+    background-color: var(--btn-background);
 }
 input:focus {
-    border-bottom: 3px solid #0067C0;
+    background-color: var(--input-active-color);
+    border-bottom: 2px solid var(--accent-color);
 }
 
 input:disabled {
-    background-color: #cdcdcd;
+    color: var(--input-disabled-text-color);
+    background-color: var(--input-disabled-color);
 }
 
 label {
-    color: #170444;
+    color: var(--text-color);
     font-weight: 600;
     letter-spacing: 0.6px;
 }
@@ -138,13 +178,6 @@ label {
     width: 100%;
     font-size: 18px;
 }
-
-/* section.info {
-    /* margin: 50px; */
-    /* width: 100vw; 
-    display: flex;
-    justify-content: center;
-} */
 
 .info-container {
     max-width: 1300px;
@@ -203,6 +236,22 @@ ul {
     width: 120px;
     height: 120px;
     border-radius: 50%;
+}
+
+@media (max-height: 700px) {
+    .calc-container {
+        width: 80%;
+        padding: 40px 40px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .calc-container {
+        width: 90%;
+        height: 95%;
+        flex-direction: row;
+        padding: 40px 25px;
+    }   
 }
 
 @media (max-width: 768px) {

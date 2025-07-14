@@ -2,7 +2,10 @@
 
 Proyek ini ditujukan untuk memenuhi tugas Guru Pak Ais
 Dari Kelas 10 Ustman Bin Affan, SMAIT As-Syifa Boarding School Jalancagak.
-***Kun 'Aliman Wa Laa Takun Jahilan!!!***
+
+> ***Kun 'Aliman Wa Laa Takun Jahilan!!!***
+
+Untuk mencobanya, [Klik di sini](https://sean372id.github.io/archive-tik/ratio-calc/).
 
 ## Member Kami Siapa Saja?
 
